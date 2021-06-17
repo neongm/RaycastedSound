@@ -11,7 +11,7 @@ public class RaycastedSound : UdonSharpBehaviour
 
     [Header("Cutoff filter")]
     public bool Cutoff = true; // Cutoff by wall toggle
-    [Range(0f, 1f)] public float WallCutoff = 0.5f; // Cutoff by single wall
+    [Range(0f, 1f)] public float WallCutoff = 0.54f; // Cutoff by single wall
     [Range(0.01f, 1f)] public float DistanceCutoff = 0.3f; // Cutoff by distance multiplier
     public float CutoffChangeSmoothing = 10f;  // Smoothness of Cutoff changes
     public float CutoffStartDistance = 20f;  // Cutoff by distance starting distance
@@ -26,7 +26,7 @@ public class RaycastedSound : UdonSharpBehaviour
     [Header("Spatial Blend filter")]
     public bool SpatialBlendChange = true; // Blending of sound direction toggle
     public float SpatialBlendChangeSmoothing = 10f; // Smoothness of Spatial Blend changes
-    [Range(0f, 1f)] public float SpatialBlendChangePerWall = 0.1f; // Spatial Blend change by single wall
+    [Range(0f, 1f)] public float SpatialBlendChangePerWall = 0.042f; // Spatial Blend change by single wall
     [Range(0f, 1f)] public float SpatialMax = 1f; // Upper bound of spatial blend
     
     [Header("Other")]
