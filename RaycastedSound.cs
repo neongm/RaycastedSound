@@ -11,7 +11,7 @@ public class RaycastedSound : UdonSharpBehaviour
 
     [Header("Cutoff filter")]
     public bool Cutoff = true; // Cutoff by wall toggle
-    [Range(0f, 1f)] public float WallCutoff = 0.54f; // Cutoff by single wall
+    [Range(0f, 1f)] public float WallCutoff = 0.56f; // Cutoff by single wall
     [Range(0.01f, 1f)] public float DistanceCutoff = 0.3f; // Cutoff by distance multiplier
     public float CutoffChangeSmoothing = 10f;  // Smoothness of Cutoff changes
     public float CutoffStartDistance = 20f;  // Cutoff by distance starting distance
@@ -143,20 +143,23 @@ public class RaycastedSound : UdonSharpBehaviour
         return Physics.RaycastAll(ray, Distance, 1<<11).Length; // counting the hits on environment layer of this ray
     }
 
-    private float DistcutSigmoidFunction(float d){      //1-1/(1+Math.pow(1+k, -d+s))
+    private float DistcutSigmoidFunction(float d)
+    {  
         return 1 - 1 / (1 + Mathf.Pow(1 + DistanceCutoff, -d + CutoffStartDistance));
     }
 
-    private float WallcutFunction(float d){
-        //return d * Mathf.Pow(1 - Mathf.Pow((1-WallCutoff), hits.Length), 2);
+    private float WallcutFunction(float d)
+    {
         return Mathf.Atan( hits * (1 + 10 * WallCutoff) ) * Distcut * WallCutoff;
     }
 
-    private float Smooth(float current, float target, float smoothing){
-        // smoothing function
-        if(current < target){  
+    private float Smooth(float current, float target, float smoothing)
+    {
+        if(current < target)
+        {  
             return current + ( (target-current)/smoothing );
-        }else{
+        }else
+        {
             return current - ( (current-target)/smoothing );
         }
     }
