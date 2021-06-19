@@ -36,7 +36,7 @@ public class RaycastedSound : UdonSharpBehaviour
     private float Distance; //!< Distance from audio source to listener
     private float Distcut; //!< Target cutoff by distance
     private float Wallcut; //!< Target cutoff by walls
-    
+
     // Variables for smoothing changes:
     private float CurrentVolume; //!< Current volume of audio source 
     private float TargetVolume; //!< Target volume of audio souce 
@@ -59,9 +59,8 @@ public class RaycastedSound : UdonSharpBehaviour
     */
     void Start()
     {
-        // making sure that lowpass filter enabled
+        // making sure that lowpass filter enabled and getting the local players VRCPlayerAPI
         gameObject.GetComponent<AudioLowPassFilter>().enabled = true; 
-        // getting the local players VRCPlayerAPI
         Player = Networking.LocalPlayer;  
     }
 
@@ -93,7 +92,6 @@ public class RaycastedSound : UdonSharpBehaviour
         if(VolumeDecrease) VolumeDecreaseFilter();
         if(Cutoff) CutoffFilter();
         if(SpatialBlendChange) SpatialBlendChangeFilter();
-        
     }
 
     /*!
@@ -103,7 +101,6 @@ public class RaycastedSound : UdonSharpBehaviour
         Makes sound less directional if audio source are behind the wall.
         
         \warning This filter has major effect on overall volume of the sound, less directional audio becomes much louder. Use carefully.
-
     */
     private void SpatialBlendChangeFilter()
     {
@@ -162,7 +159,7 @@ public class RaycastedSound : UdonSharpBehaviour
         TargetVolume = VolumeMax - VolDecPerWall * hits; 
 
         // ensuring that target volume is not lower than minimum value  
-        if(VolumeMin!=0 && TargetVolume<VolumeMin) TargetVolume = VolumeMin;
+        if(VolumeMin != 0 && TargetVolume < VolumeMin) TargetVolume = VolumeMin;
 
         // applying it to audioSource
         if(WallVolumeDecreaseSmoothing != 0){
@@ -170,7 +167,6 @@ public class RaycastedSound : UdonSharpBehaviour
         }else{
             AudioSource.volume = TargetVolume;
         }
-        
     }
 
      /*!
