@@ -7,3 +7,5 @@ To use the script add it to udon behavour on the AudioSource object, put the thi
 > Note: Only the object on Environment (11) layer will affect the sound.
 
 Default values seems to be optimal in most of the situations, but you might want to tweak it.
+
+this repository was made as part of practice work in my university
